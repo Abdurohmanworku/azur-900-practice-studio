@@ -308,3 +308,19 @@ http.createServer((req, res) => {
   if (req.method === 'GET' && p === '/api/languages') return send(res, 200, LANGS);
   send(res, 404, { error: 'not found' });
 }).listen(PORT, () => console.log('AZ-900 Practice Studio (unofficial) on http://localhost:' + PORT));
+//--------------------
+// ... keep your existing server creation code up here ...
+
+const server = http.createServer((req, res) => {
+    // Your existing request handling logic
+});
+
+// ONLY listen locally if not running on Vercel
+if (process.env.NODE_ENV !== 'production') {
+    server.listen(PORT, () => {
+        console.log(`Server running at http://localhost:${PORT}`);
+    });
+}
+
+// Export the server for Vercel's serverless runtime
+module.exports = server;
